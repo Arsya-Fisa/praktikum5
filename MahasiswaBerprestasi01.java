@@ -18,7 +18,7 @@ public class MahasiswaBerprestasi01 {
         for (mahasiswa01 m : listMhs){
             if (m != null) {
                 m.tampilkaninformasi();
-                System.out.println("----------------------");
+                System.out.println("----------------------------------");
             }
         }
     }
@@ -33,32 +33,29 @@ public class MahasiswaBerprestasi01 {
             }
         }
     }
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Masukan jumlah mahasiswa: ");
-        int jumlahmhs= input.nextInt();
-        input.nextLine();
-
-       MahasiswaBerprestasi01 list = new MahasiswaBerprestasi01(jumlahmhs);
-       for (int i = 0; i < jumlahmhs; i++) {
-        System.out.println("Masukkan data mahasiswa ke-" + (i + 1) + ":");
-            System.out.print("NIM: ");
-            String nim = input.nextLine();
-            System.out.print("Nama: ");
-            String nama = input.nextLine();
-            System.out.print("Kelas: ");
-            String kelas = input.nextLine();
-            System.out.print("IPK: ");
-            double ipk = Double.parseDouble(input.nextLine());
-
-            mahasiswa01 m = new mahasiswa01(nim, nama, kelas, ipk);
-            list.tambah(m);
-       }
-       System.out.println("Data mahasiswa sebelum sorting: ");
-       list.tampil();
-       System.out.println("Data mahasiswa setelah sorting berdasarkan ipk (DESC) : ");
-       list.bubbleSort();
-       list.tampil();
+    void selectionsort(){
+        for (int i = 0; i < listMhs.length-1; i++) {
+            int idxMin=1;
+            for (int j = i+1; j < listMhs.length; j++) {
+                if (listMhs[j].ipk<listMhs[idxMin].ipk) {
+                    idxMin=j;
+                }
+            }
+        mahasiswa01 tmp =listMhs[idxMin];
+        listMhs[idxMin]=listMhs[i];
+        listMhs[i]=tmp;
+        }
+    }
+    void insertionsort(){
+        for (int i = 1; i < listMhs.length; i++) {
+            mahasiswa01 temp = listMhs[i];
+            int j = i;
+            while (j>0 && listMhs[j-1].ipk>temp.ipk) {
+                listMhs[j]=listMhs[j-1];
+                j--;
+            }
+            listMhs[j]=temp;
+        }
     }
 }
    
